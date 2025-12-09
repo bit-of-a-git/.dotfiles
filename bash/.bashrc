@@ -3,10 +3,32 @@
 # Source global definitions
 if [ -f /etc/bashrc ]; then . /etc/bashrc; fi
 
-for file in ~/.bash_{aliases,exports,functions,prompt,settings}; do
-    [ -r "$file" ] && [ -f "$file" ] && source "$file";
-done;
-unset file;
+# Source bash completion
+if [ -f /etc/bash_completion ]; then
+    . /etc/bash_completion
+elif [ -f /usr/share/bash-completion/bash_completion ]; then
+    . /usr/share/bash-completion/bash_completion
+fi
 
-source ~/.gitstatus/gitstatus.prompt.sh
-PROMPT_COMMAND="my_prompt; history -a"
+for file in ~/.bash_{aliases,exports,functions,prompt,settings}; do
+    [ -r "$file" ] && [ -f "$file" ] && source "$file"
+done
+unset file
+
+if [ -f ~/.gitstatus/gitstatus.prompt.sh ]; then
+    source ~/.gitstatus/gitstatus.prompt.sh
+    PROMPT_COMMAND='PROMPT_EXIT_CODE=$?; history -a; history -n; my_prompt $PROMPT_EXIT_CODE'
+else
+    PROMPT_COMMAND='history -a; history -n;'
+fi
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"                   # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion" # This loads nvm bash_completion
+
+if command -v npm >/dev/null 2>&1; then
+    source <(npm completion)
+fi
+
+# This sets up fzf. I am mainly looking for the ctrl+r command, so disabling the others
+FZF_CTRL_T_COMMAND= FZF_ALT_C_COMMAND= eval "$(fzf --bash)"

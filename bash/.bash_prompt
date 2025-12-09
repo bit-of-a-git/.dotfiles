@@ -26,8 +26,8 @@ PROMPT_ERROR=${PROMPT_BRIGHT_RED}
 PROMPT_CLEAR='\[\033[00m\]'
 
 function my_prompt() {
-    # Saves the exit status of the last command
-    local EXIT="${?}"
+    # Gets the first argument passed in to my_prompt
+    local EXIT=$1
 
     # Checks if a virtual environment is active, and if so, includes it in the prompt
     if [[ -n "${VIRTUAL_ENV}" ]]; then
@@ -75,7 +75,7 @@ function my_prompt() {
         if [[ "${VCS_STATUS_HAS_STAGED}" -eq 1 || "${VCS_STATUS_HAS_UNSTAGED}" -eq 1 ]]; then
             PS1+="${PROMPT_ERROR} x"
         else
-            PS1+=" ✓"
+            PS1+=" ${PROMPT_BRIGHT_GREEN}✓"
         fi
 
         PS1+="${PROMPT_COLOUR_THREE}]"
