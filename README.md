@@ -14,7 +14,7 @@ To use these dotfiles, you'll need:
 
 1. Clone this repository to your local machine:
     ```bash
-    git clone https://github.com/bit-of-a-git/dotfiles.git ~/.dotfiles
+    git clone https://github.com/bit-of-a-git/.dotfiles.git
     ```
 
 2. Navigate to the `dotfiles` directory:
