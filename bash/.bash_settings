@@ -5,7 +5,7 @@ shopt -s cdspell
 
 # don't put duplicate lines or lines starting with space in the history.
 # Add a space to your commands to avoid saving them.
-HISTCONTROL=ignoreboth
+HISTCONTROL=ignoreboth:erasedups
 
 # Causes bash to append to history instead of overwriting it
 # If you start a new terminal, you have old session history
