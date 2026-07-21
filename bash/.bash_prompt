@@ -26,8 +26,8 @@ PROMPT_ERROR=${PROMPT_BRIGHT_RED}
 PROMPT_CLEAR='\[\033[00m\]'
 
 function my_prompt() {
-    # Saves the exit status of the last command
-    local EXIT="${?}"
+    # Gets the first argument passed in to my_prompt
+    local EXIT=$1
 
     # Checks if a virtual environment is active, and if so, includes it in the prompt
     local venv_prompt=""
